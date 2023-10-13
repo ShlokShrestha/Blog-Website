@@ -16,14 +16,13 @@ module.exports.signUp = async (req, res) => {
   }
 };
 
-
 module.exports.login = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const userDoc = await User.findOne({ email });
     const passOk = bcrypt.compare(password, userDoc.password);
     if (passOk) {
-      const token = jwt.sign({ username, id: userDoc._id }, "abcd", {
+      const token = jwt.sign({ username, id: userDoc._id }, "adadad", {
         expiresIn: "1hr",
       });
       res.cookies(token).json("ok");
