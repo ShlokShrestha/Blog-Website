@@ -15,7 +15,7 @@ const HomePage = () => {
 
   useEffect(() => {
     getAllProduct();
-  });
+  }, []);
   return (
     <div className="p-8 bg-slate-100 h-full">
       <div>
@@ -25,7 +25,7 @@ const HomePage = () => {
 
         <div className="grid lg:grid-cols-3 gap-20 p-10">
           {allProduct.map((data) => (
-            <Card product={data} />
+            <Card product={data} key={data._id} />
           ))}
         </div>
       </div>

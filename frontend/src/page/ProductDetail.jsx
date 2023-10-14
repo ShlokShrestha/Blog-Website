@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import products from "../data.jsx";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../context/UserContext";
 const ProductDetail = () => {
   const [product, setProduct] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
+  const { setUserInfo, userInfo } = useContext(UserContext);
   console.log(id);
   const productDetail = async () => {
     try {
@@ -35,7 +36,7 @@ const ProductDetail = () => {
     try {
       const res = await axios.delete(`http://localhost:8000/product/${_id}`);
       setProduct(res.data);
-      console.log(res.data);
+
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -60,26 +61,30 @@ const ProductDetail = () => {
               <p className="text-2xl mb-1">Discount: {discount}%</p>
               <p className="text-2xl mb-1">Rating: {rating}</p>
               <p className="text-2xl mb-1">{description}</p>
-              <div className="flex">
-                <div className="my-5 mr-5">
-                  <button
-                    type="submit"
-                    class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900"
-                    onClick={() => handleChange(_id)}
-                  >
-                    Edit Detail
-                  </button>
+              {userInfo ? (
+                <div className="flex">
+                  <div className="my-5 mr-5">
+                    <button
+                      type="submit"
+                      class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900"
+                      onClick={() => handleChange(_id)}
+                    >
+                      Edit Detail
+                    </button>
+                  </div>
+                  <div className="my-5 mr-5">
+                    <button
+                      type="submit"
+                      class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800"
+                      onClick={() => handleClick(_id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
-                <div className="my-5 mr-5">
-                  <button
-                    type="submit"
-                    class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800"
-                    onClick={() => handleClick(_id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>

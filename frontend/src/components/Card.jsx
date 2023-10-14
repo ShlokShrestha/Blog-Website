@@ -23,7 +23,7 @@ const Card = ({ product }) => {
           <Link
             to={`/productDetail/${_id}`}
             type="submit"
-            class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900"
+            className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900"
           >
             View More
           </Link>

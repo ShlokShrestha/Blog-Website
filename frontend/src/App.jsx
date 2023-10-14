@@ -2,20 +2,27 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import HomePage from "./page/HomePage";
 import CreatePage from "./page/CreatePage";
-import EditPage from "./page/EditPage"
+import EditPage from "./page/EditPage";
+import LoginPage from "./page/loginPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductDetail from "./page/ProductDetail";
+import Signup from "./page/SignUp";
+import { UserContextProvider } from "./context/UserContext.jsx";
 const App = () => {
   return (
     <>
       <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/createPage" element={<CreatePage />} />
-          <Route path="/productDetail/:id" element={<ProductDetail />} />
-          <Route path="/editPage/:id" element={<EditPage />} />
-        </Routes>
+        <UserContextProvider>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/loginPage" element={<LoginPage />} />
+            <Route path="/signUpPage" element={<Signup />} />
+            <Route path="/createPage" element={<CreatePage />} />
+            <Route path="/productDetail/:id" element={<ProductDetail />} />
+            <Route path="/editPage/:id" element={<EditPage />} />
+          </Routes>
+        </UserContextProvider>
       </Router>
     </>
   );
