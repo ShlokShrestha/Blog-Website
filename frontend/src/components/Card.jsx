@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Card = ({ product }) => {
-  const { _id, thumbnail, title, category, price, discount, rating } =
+  const { _id, image, title, category, price, discount, rating } =
     product;
   return (
     <div>
       <div className="bg-gray-300 rounded shadow-md " key={_id}>
         <Link to={`/productDetail/${_id}`}>
           <div className="overflow-hidden h-64 ">
-            <img src={thumbnail} className="object-cover w-full h-full rounded" />
+            <img src={`http://localhost:8000/uploads/${image}`} className="object-cover w-full h-full rounded" />
           </div>
         </Link>
         <div className="mx-5 mb-2 mt-5">

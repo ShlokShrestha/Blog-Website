@@ -19,6 +19,7 @@ const productSchema = new Schema({
     max: [5, "wrong max rating"],
   },
   category: { type: String, required: true },
-  thumbnail: { type: String, required: true },
+  image: { type: String, required: true },
+  //thumbnail: { type: String, required: true },
 });
 exports.Product = mongoose.model("Product", productSchema);

@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const CreatePage = () => {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({
+    title: "",
+    price: "",
+    description: "",
+    discount: "",
+    rating: "",
+    category: "",
+    image: "",
+  });
   const navigate = useNavigate();
   const handleChange = (e) => {
     console.log({ [e.target.name]: e.target.value });
@@ -11,20 +19,35 @@ const CreatePage = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createProduct(product);
-    navigate("/");
+  const handleImage = (e) => {
+    console.log(e.target.files[0]);
+    setProduct({
+      ...product,
+      image: e.target.files[0],
+    });
   };
-
-  const createProduct = async (product) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", product.image, product.image.name);
+    formData.append("title", product.title);
+    formData.append("price", product.price);
+    formData.append("discount", product.discount);
+    formData.append("description", product.description);
+    formData.append("rating", product.rating);
+    formData.append("category", product.category);
     try {
-      const res = await axios.post("http://localhost:8000/product", product);
+      const res = await axios.post("http://localhost:8000/product", formData);
       console.log(res.data);
     } catch (error) {
       console.log(error);
     }
+    navigate("/");
   };
+
+  // const createProduct = async (product) => {
+
+  // };
 
   return (
     <div>
@@ -122,7 +145,7 @@ const CreatePage = () => {
               <option value="laptops">Laptops</option>
             </select>
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label for="title" className="block text-gray-600 mb-2 ">
               Thumbnail
             </label>
@@ -134,18 +157,19 @@ const CreatePage = () => {
               className="form-input w-full rounded px-3 py-1"
               onChange={handleChange}
             />
-          </div>
-          {/* <div className="mb-4">
+          </div> */}
+          <div className="mb-4">
             <label for="productImage" className="block text-gray-600 mb-2">
               Product Image
             </label>
             <input
               type="file"
-              id="productImage"
-              name="productImage"
+              id="image"
+              name="image"
               className="form-input w-full"
+              onChange={handleImage}
             />
-          </div> */}
+          </div>
           <button
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"

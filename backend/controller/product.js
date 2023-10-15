@@ -4,7 +4,17 @@ const Product = model.Product;
 
 exports.createProduct = async (req, res) => {
   try {
-    const product = new Product(req.body);
+    const image = req.file ? req.file.filename : null;
+    const { title, description, rating, category, discount, price } = req.body;
+    const product = new Product({
+      title,
+      description,
+      rating,
+      category,
+      discount,
+      price,
+      image,
+    });
     const doc = await product.save();
     res.status(201).json(doc);
   } catch (err) {
