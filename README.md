@@ -28,6 +28,6 @@ List the technologies and tools used in your project. You can format it as a bul
 ## Getting Started
 Provide instructions for users on how to get started with your project. Include information on how to install, configure, and run the project.
 
-1. Clone the repository: `git clone https://github.com/yourusername/yourproject.git`
+1. Clone the repository: `git clone https://github.com/ShlokShrestha/Sajilo-Store.git`
 2. Install the necessary dependencies: `npm install`
 3. Start the project: `npm start`
