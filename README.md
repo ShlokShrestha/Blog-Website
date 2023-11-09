@@ -14,8 +14,7 @@ List the technologies and tools used in your project. You can format it as a bul
 
 - Frontend:
   - Framework: React
-  - State Management: Redux
-  - UI Library: Material-UI
+  - UI : CSS
 - Backend:
   - Framework: Express.js
   - Database: Mongose
