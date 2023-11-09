@@ -18,7 +18,7 @@ app.use(
     credentials: true,
   })
 );
-// app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/product", productRouter);
