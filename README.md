@@ -13,8 +13,9 @@ List the key features and functionalities of your project.
 List the technologies and tools used in your project. You can format it as a bullet list or a table, depending on your preference.
 
 - Frontend:
-  - Framework: React with Vite
-  - UI Library: CSS
+  - Framework: React
+  - State Management: Redux
+  - UI Library: Material-UI
 - Backend:
   - Framework: Express.js
   - Database: Mongose
