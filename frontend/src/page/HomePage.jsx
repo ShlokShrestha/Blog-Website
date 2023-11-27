@@ -20,8 +20,8 @@ const HomePage = () => {
   return (
     <div className="p-8 bg-slate-100 h-full">
       <div>
-        <h1 className="text-center text-3xl font-semibold underline text-gray-800">
-          All Product
+        <h1 className="text-center text-3xl font-semibold text-gray-800">
+          All BLog Post
         </h1>
 
         <div className="grid lg:grid-cols-3 gap-20 p-10">

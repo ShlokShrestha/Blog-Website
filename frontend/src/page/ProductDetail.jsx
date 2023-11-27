@@ -6,8 +6,8 @@ const ProductDetail = () => {
   const [product, setProduct] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
-  const { setUserInfo, userInfo } = useContext(UserContext);
-  console.log(id);
+  const { userInfo } = useContext(UserContext);
+
   const productDetail = async () => {
     try {
       const res = await axios.get(`http://localhost:8000/product/${id}`);
@@ -21,16 +21,7 @@ const ProductDetail = () => {
     productDetail();
   }, []);
 
-  const {
-    _id,
-    thumbnail,
-    title,
-    category,
-    price,
-    discount,
-    rating,
-    description,
-  } = product;
+  const { _id, image, title, description } = product;
   console.log(product);
   const handleClick = async (_id) => {
     try {
@@ -49,17 +40,16 @@ const ProductDetail = () => {
     <div className="p-8 bg-slate-100">
       <div>
         <h1 className="text-center text-3xl font-semibold underline text-gray-800">
-          Product Detail
+          Blog Detail Page
         </h1>
-        <div className="grid lg:grid-cols-2 my-10">
-          <img src={thumbnail} className="] mx-auto" alt="" />
+        <div className="grid lg:grid-cols-1 my-10 w-2/3 mx-auto">
+          <img
+            src={`http://localhost:8000/uploads/${image}`}
+            className="object-cover w-full h-full rounded"
+          />
           <div>
             <div className="mx-5 mb-2 mt-5">
-              <h3 className="text-5xl mb-1 font-bold uppercase">{title}</h3>
-              <p className="text-2xl mb-1">Category: {category}</p>
-              <p className="text-2xl mb-1">Price: {price}</p>
-              <p className="text-2xl mb-1">Discount: {discount}%</p>
-              <p className="text-2xl mb-1">Rating: {rating}</p>
+              <h3 className="text-xl mb-1 font-bold uppercase">{title}</h3>
               <p className="text-2xl mb-1">{description}</p>
               {userInfo ? (
                 <div className="flex">

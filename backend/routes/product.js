@@ -17,6 +17,6 @@ router
   .get("/", productController.getAllProduct)
   .get("/:id", productController.getProduct)
   .delete("/:id", productController.deleteProduct)
-  .patch("/:id", productController.updateProduct);
+  .patch("/:id", upload.single("image"), productController.updateProduct);
 
 module.exports = router;

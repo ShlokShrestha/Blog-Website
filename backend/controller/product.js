@@ -5,14 +5,10 @@ const Product = model.Product;
 exports.createProduct = async (req, res) => {
   try {
     const image = req.file ? req.file.filename : null;
-    const { title, description, rating, category, discount, price } = req.body;
+    const { title, description } = req.body;
     const product = new Product({
       title,
       description,
-      rating,
-      category,
-      discount,
-      price,
       image,
     });
     const doc = await product.save();
@@ -44,8 +40,15 @@ exports.getProduct = async (req, res) => {
 };
 exports.updateProduct = async (req, res) => {
   try {
+    const image = req.file ? req.file.filename : null;
+    const { title, description } = req.body;
+    const updatedProduct = {
+      title,
+      description,
+      image,
+    };
     const id = req.params.id;
-    const doc = await Product.findByIdAndUpdate({ _id: id }, req.body, {
+    const doc = await Product.findByIdAndUpdate(id, updatedProduct, {
       new: true,
     }).exec();
     res.status(201).json(doc);

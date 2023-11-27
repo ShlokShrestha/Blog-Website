@@ -5,12 +5,8 @@ const EditPage = () => {
   const { id } = useParams();
   const [editProduct, setEditProduct] = useState({
     title: "",
-    price: 0,
-    discount: 0,
-    rating: 0,
     description: "",
-    category: "",
-    thumbnail: "",
+    image: "",
   });
   useEffect(() => {
     const getAllProduct = async () => {
@@ -26,23 +22,34 @@ const EditPage = () => {
 
   const navigate = useNavigate();
   const handleChange = (e) => {
-    console.log({ [e.target.name]: e.target.value });
     setEditProduct({
       ...editProduct,
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = (e) => {
+  const handleImage = (e) => {
+    console.log(e.target.files[0]);
+    setEditProduct({
+      ...editProduct,
+      image: e.target.files[0],
+    });
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    updateProduct(id, editProduct);
+    await updateProduct(id, editProduct);
     navigate("/");
   };
 
   const updateProduct = async (id, editProduct) => {
     try {
+      const formData = new FormData();
+      formData.append("title", editProduct.title);
+      formData.append("description", editProduct.description);
+      formData.append("image", editProduct.image);
+
       const res = await axios.patch(
         `http://localhost:8000/product/${id}`,
-        editProduct
+        formData
       );
       console.log(res.data);
     } catch (error) {
@@ -59,6 +66,7 @@ const EditPage = () => {
         <form
           className="lg:w-2/5 w-full mx-auto bg-gray-300 py-10 px-8 my-10 rounded"
           onSubmit={handleSubmit}
+          encType="multipart/form-data"
         >
           <div className="mb-4">
             <label for="title" className="block text-gray-600 mb-2 ">
@@ -74,48 +82,7 @@ const EditPage = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-4">
-            <label for="price" className="block text-gray-600 mb-2 ">
-              Price:
-            </label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              value={editProduct.price}
-              placeholder="Enter your product price"
-              className="form-input w-full rounded px-3 py-1"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-4">
-            <label for="discount" className="block text-gray-600 mb-2 ">
-              Discount:
-            </label>
-            <input
-              type="number"
-              id="discount"
-              name="discount"
-              value={editProduct.discount}
-              placeholder="Enter your product discount"
-              className="form-input w-full rounded px-3 py-1"
-              onChange={handleChange}
-            />
-          </div>{" "}
-          <div className="mb-4">
-            <label for="discount" className="block text-gray-600 mb-2 ">
-              Rating:
-            </label>
-            <input
-              type="number"
-              id="rating"
-              name="rating"
-              value={editProduct.rating}
-              placeholder="Enter your product discount"
-              className="form-input w-full rounded px-3 py-1"
-              onChange={handleChange}
-            />
-          </div>
+
           <div className="mb-4">
             <label
               for="productDescription"
@@ -133,40 +100,8 @@ const EditPage = () => {
               onChange={handleChange}
             ></textarea>
           </div>
+
           <div className="mb-4">
-            <label
-              for="productDescription"
-              className="block text-gray-600 mb-2"
-            >
-              Categories
-            </label>
-            <select
-              id="category"
-              name="category"
-              value={editProduct.category}
-              className="form-control w-full outline-none p-2 mb-2"
-              onChange={handleChange}
-            >
-              <option value="">Choose</option>
-              <option value="smartphone">SmartPhone</option>
-              <option value="laptops">Laptops</option>
-            </select>
-          </div>
-          <div className="mb-4">
-            <label for="title" className="block text-gray-600 mb-2 ">
-              Thumbnail
-            </label>
-            <input
-              type="url"
-              id="thumbnail"
-              name="thumbnail"
-              value={editProduct.thumbnail}
-              placeholder="Enter your product name"
-              className="form-input w-full rounded px-3 py-1"
-              onChange={handleChange}
-            />
-          </div>
-          {/* <div className="mb-4">
             <label for="productImage" className="block text-gray-600 mb-2">
               Product Image
             </label>
@@ -175,8 +110,9 @@ const EditPage = () => {
               id="productImage"
               name="productImage"
               className="form-input w-full"
+              onChange={handleImage}
             />
-          </div> */}
+          </div>
           <button
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
