@@ -1,7 +1,7 @@
-# Sajilo Store
+# Blog Website
 
 ## Introduction
-Provide a brief introduction to your project. Explain what it does, its main purpose, and why it's valuable or interesting.
+A blog website is a simple platform with CRUD operations and user authentication based on JWT tokens using a REST API.
 
 ## Key Features
 List the key features and functionalities of your project.
@@ -14,7 +14,7 @@ List the technologies and tools used in your project. You can format it as a bul
 
 - Frontend:
   - Framework: React
-  - UI : CSS
+  - UI : Tailwind CSS
 - Backend:
   - Framework: Express.js
   - Database: Mongose
