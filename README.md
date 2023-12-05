@@ -1,7 +1,7 @@
 # Blog Website
 
 ## Introduction
-A blog website is a simple platform with CRUD operations and user authentication based on JWT tokens using a REST API.
+A blog website is a simple website with CRUD operations and user authentication based on JWT tokens using a REST API.
 
 ## Key Features
 - Secure user registration and login with JWT authentication
